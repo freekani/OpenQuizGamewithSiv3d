@@ -34,10 +34,10 @@ void Main()
 	System::Update();
 
 	//ここからクイズフォーマット１
-	TextButton B0(Window::Width() / 4, Window::Height() * 13 / 20, Window::Width() * 19 / 40, Window::Height() * 12 / 60);
-	TextButton B1(Window::Width() / 4, Window::Height() * 26 / 30, Window::Width() * 19 / 40, Window::Height() * 12 / 60);
-	TextButton B2(Window::Width() / 4 * 3, Window::Height() * 13 / 20, Window::Width() * 19 / 40, Window::Height() * 12 / 60);
-	TextButton B3(Window::Width() / 4 * 3, Window::Height() * 26 / 30, Window::Width() * 19 / 40, Window::Height() * 12 / 60);
+	TextButton Button0(Window::Width() / 2, Window::Height() * 12 / 30, Window::Width() * 39 / 40, Window::Height() * 1 / 7);
+	TextButton Button1(Window::Width() / 2, Window::Height() * 17 / 30, Window::Width() * 39 / 40, Window::Height() * 1 / 7);
+	TextButton Button2(Window::Width() / 2, Window::Height() * 22 / 30, Window::Width() * 39 / 40, Window::Height() * 1 / 7);
+	TextButton Button3(Window::Width() / 2, Window::Height() * 27 / 30, Window::Width() * 39 / 40, Window::Height() * 1 / 7);
 	//ここまで
 	int clock1 = 0;
 	int point = 0;
@@ -68,15 +68,22 @@ void Main()
 	for (int i = 0; i < 10; i++) {
 		srand(time(NULL));
 		if (quizList.size() == 0) { break; }
-		 int qn = rand() % (quizList.size());
-
+		int qn = rand() % (quizList.size());
+		Quiz4 now_playing = quizList[qn];
+		quizList.erase(quizList.begin() + qn);
 		clock1 = clock();
+		Button0.setText(now_playing.getS0());
+		Button1.setText(now_playing.getS1());
+		Button2.setText(now_playing.getS2());
+		Button3.setText(now_playing.getS3());
 		while (System::Update())
 		{
 			//if (100 < clock() - clock1) {}
 			font2(U"残り時間：" + ToString(20000 - clock() + clock1)).draw(200, 50, Color(0, 0, 0));
-			font2(U"制作者：" + quizList[qn].getPresenter()).draw(Arg::center = Point(700, 250), Color(0, 0, 0));
-			font2(quizList[qn].getQuestion()).draw(Arg::center = Point(437, 100), Color(0, 0, 0));
+			font2(U"制作者：" + now_playing.getPresenter()).draw(Arg::center = Point(700, 250), Color(0, 0, 0));
+
+
+			font2(now_playing.getQuestion()).draw(Arg::center = Point(437, 100), Color(0, 0, 0));
 			if (clock() - clock1 > 20000) {
 
 				check = U"4";
@@ -85,19 +92,19 @@ void Main()
 			}
 			if (KeyEscape.down()/* || WindowEvent::CloseButton*/) { system("taskkill /IM kani.funquiz.exe /F"); }
 
-			if (B0.draw(quizList[qn].getS0())) {
+			if (Button0.draw()) {
 				check = U"0";
 				break;
 			}
-			if (B1.draw(quizList[qn].getS1())) {
+			if (Button1.draw()) {
 				check = U"1";
 				break;
 			}
-			if (B2.draw(quizList[qn].getS2())) {
+			if (Button2.draw()) {
 				check = U"2";
 				break;
 			}
-			if (B3.draw(quizList[qn].getS3())) {
+			if (Button3.draw()) {
 				check = U"3";
 				break;
 			}
@@ -140,7 +147,7 @@ void Main()
 			Sleep(2500);
 
 		}
-		quizList.erase(quizList.begin() + qn);
+
 	}
 	int end = 0;
 	while (System::Update()) {
