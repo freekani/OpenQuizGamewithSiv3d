@@ -80,7 +80,7 @@ void Main()
 		{
 			//if (100 < clock() - clock1) {}
 			font2(U"残り時間：" + ToString(20000 - clock() + clock1)).draw(200, 50, Color(0, 0, 0));
-			font2(U"制作者：" + now_playing.getPresenter()).draw(Arg::center = Point(700, 250), Color(0, 0, 0));
+			font2(U"制作者：" + now_playing.getPresenter()).draw(Arg::center = Point(700, 150), Color(0, 0, 0));
 
 
 			font2(now_playing.getQuestion()).draw(Arg::center = Point(437, 100), Color(0, 0, 0));
@@ -90,7 +90,7 @@ void Main()
 
 				break;
 			}
-			if (KeyEscape.down()/* || WindowEvent::CloseButton*/) { system("taskkill /IM kani.funquiz.exe /F"); }
+			if (KeyEscape.down()/* || WindowEvent::CloseButton*/) { system("taskkill /IM kAnifunquizG.exe /F"); }
 
 			if (Button0.draw()) {
 				check = U"0";
@@ -111,7 +111,7 @@ void Main()
 
 		}
 
-		if (quizList[qn].getAnswer() == check) {
+		if (now_playing.getAnswer() == check) {
 			point += 20000 + clock1 - clock();
 			//正解
 			System::Update();
