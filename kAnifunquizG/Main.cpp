@@ -18,11 +18,13 @@ void Main()
 	Graphics::SetBackground(Palette::White);//背景
 
 	const Font font(30);
-	const Font font2(15);
+	const Font quizInfomationFont(17);
+	const Font quizScriptsFont(16);
+
 
 	while (System::Update()) {
 		font(U"Press start").draw(Arg::center = Window::Center(), Color(0, 0, 0));
-		if (MouseL.down()) break;
+		if (MouseL.up()) break;
 
 	}
 
@@ -66,9 +68,9 @@ void Main()
 		quizList.push_back(Quiz4(addQuestion, addS0, addS1, addS2, addS3, addAnswer, addPresenter, addGenre));
 	}
 	for (int i = 0; i < 10; i++) {
-		srand(time(NULL));
+
 		if (quizList.size() == 0) { break; }
-		int qn = rand() % (quizList.size());
+		int qn = Random(0, int(quizList.size() - 1));
 		Quiz4 now_playing = quizList[qn];
 		quizList.erase(quizList.begin() + qn);
 		clock1 = clock();
@@ -79,18 +81,20 @@ void Main()
 		while (System::Update())
 		{
 			//if (100 < clock() - clock1) {}
-			font2(U"残り時間：" + ToString(20000 - clock() + clock1)).draw(200, 50, Color(0, 0, 0));
-			font2(U"制作者：" + now_playing.getPresenter()).draw(Arg::center = Point(700, 150), Color(0, 0, 0));
+			quizInfomationFont(U"残り時間：" + ToString(20000 - clock() + clock1)).draw(Arg::center = Point(Window::Width() / 20 * 3, Window::Height() / 13), Color(0, 0, 0));
+			quizInfomationFont(U"制作者：" + now_playing.getPresenter()).draw(Arg::center = Point(Window::Width() / 20 * 17, Window::Height() / 13), Color(0, 0, 0));
 
 
-			font2(now_playing.getQuestion()).draw(Arg::center = Point(437, 100), Color(0, 0, 0));
+			quizScriptsFont(now_playing.getQuestion()).draw(Arg::center = Point(437, 100), Color(0, 0, 0));
 			if (clock() - clock1 > 20000) {
 
 				check = U"4";
 
 				break;
 			}
-			if (KeyEscape.down()/* || WindowEvent::CloseButton*/) { system("taskkill /IM kAnifunquizG.exe /F"); }
+			if (KeyEscape.down()/* || WindowEvent::CloseButton*/) {
+				system("taskkill /IM kAnifunquizG.exe /F");
+			}
 
 			if (Button0.draw()) {
 				check = U"0";
@@ -146,6 +150,10 @@ void Main()
 
 			Sleep(2500);
 
+		}
+
+		if (quizList.size() == 0) {
+			break;
 		}
 
 	}
