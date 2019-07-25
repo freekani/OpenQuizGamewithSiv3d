@@ -56,7 +56,8 @@ void Main()
 	Sleep(500);
 
 
-	//clock1=clock();
+
+	
 	while (reader.readLine(addQuestion)) {
 		reader.readLine(addS0);
 		reader.readLine(addS1);
@@ -65,7 +66,7 @@ void Main()
 		reader.readLine(addAnswer);
 		reader.readLine(addPresenter);
 		reader.readLine(addGenre);
-		quizList.push_back(Quiz4(addQuestion, addS0, addS1, addS2, addS3, addAnswer, addPresenter, addGenre));
+		quizList.emplace_back(Quiz4(addQuestion, addS0, addS1, addS2, addS3, addAnswer, addPresenter, addGenre));
 	}
 	for (int i = 0; i < 10; i++) {
 
@@ -74,10 +75,10 @@ void Main()
 		Quiz4 now_playing = quizList[qn];
 		quizList.erase(quizList.begin() + qn);
 		clock1 = clock();
-		Button0.setText(now_playing.getS0());
-		Button1.setText(now_playing.getS1());
-		Button2.setText(now_playing.getS2());
-		Button3.setText(now_playing.getS3());
+		Button0.setText(now_playing.getA0());
+		Button1.setText(now_playing.getA1());
+		Button2.setText(now_playing.getA2());
+		Button3.setText(now_playing.getA3());
 		while (System::Update())
 		{
 			//if (100 < clock() - clock1) {}

@@ -5,10 +5,11 @@ class TextButton
 {
 private:
 	int x, y, width, height;
+	String text;
 public:
 	Rect button;
 	Font drawText;
-	String text;
+	
 	TextButton(int x, int y, int width, int hight) {
 		this->x = x;
 		this->y = y;
@@ -37,5 +38,3 @@ public:
 		//drawText = Font(Window::Size().x / text.size() / 4);
 	}
 };
-
-
