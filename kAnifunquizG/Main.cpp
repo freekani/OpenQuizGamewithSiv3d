@@ -57,16 +57,17 @@ void Main()
 
 
 
-	
+
 	while (reader.readLine(addQuestion)) {
 		reader.readLine(addS0);
 		reader.readLine(addS1);
 		reader.readLine(addS2);
 		reader.readLine(addS3);
 		reader.readLine(addAnswer);
-		reader.readLine(addPresenter);
 		reader.readLine(addGenre);
-		quizList.emplace_back(Quiz4(addQuestion, addS0, addS1, addS2, addS3, addAnswer, addPresenter, addGenre));
+		reader.readLine(addPresenter);
+
+		quizList.emplace_back(Quiz4(addQuestion, addS0, addS1, addS2, addS3, addAnswer, addGenre, addPresenter));
 	}
 	for (int i = 0; i < 10; i++) {
 
@@ -93,9 +94,7 @@ void Main()
 
 				break;
 			}
-			if (KeyEscape.down()/* || WindowEvent::CloseButton*/) {
-				system("taskkill /IM kAnifunquizG.exe /F");
-			}
+
 
 			if (Button0.draw()) {
 				check = U"0";

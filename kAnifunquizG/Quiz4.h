@@ -14,16 +14,18 @@ private:
 	String genre;
 public:
 
-	Quiz4(String question, String a0, String a1, String a2, String a3, String answer, String presenter, String genre) {
+	Quiz4(String question, String a0, String a1, String a2, String a3, String answer, String genre, String presenter) {
 		this->question = question;
 		this->a0 = a0;
 		this->a1 = a1;
 		this->a2 = a2;
 		this->a3 = a3;
 		this->answer = answer;
-		this->presenter = presenter;
 		this->genre = genre;
+		this->presenter = presenter;
+
 	}
+	/*
 	Quiz4(JSONValue j)
 		: question(j[U"question"].get<String>())
 		, a0(j[U"a0"].get<String>())
@@ -31,9 +33,10 @@ public:
 		, a2(j[U"a2"].get<String>())
 		, a3(j[U"a3"].get<String>())
 		, answer(j[U"answer"].get<String>())
-		, presenter(j[U"presenter"].get<String>())
-		, genre(j[U"genre"].get<String>())
+		,genre(j[U"genre"].get<String>())
+		, presenter(j[U"presenter"].get<String>()) 
 	{}
+	*/
 	String getQuestion() {
 		return this->question;
 	}
@@ -52,11 +55,11 @@ public:
 	String getAnswer() {
 		return this->answer;
 	}
-	String getPresenter() {
-		return this->presenter;
-	}
 	String getGenre() {
 		return this->genre;
+	}
+	String getPresenter() {
+		return this->presenter;
 	}
 };
 
